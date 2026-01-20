@@ -1,0 +1,49 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+repos:
+  # Базовые хуки
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace      # Удаляет пробелы в конце строк
+      - id: end-of-file-fixer        # Добавляет пустую строку в конце файла
+      - id: check-yaml               # Проверяет синтаксис YAML
+      - id: check-added-large-files  # Предупреждает о больших файлах (>500KB)
+      - id: check-merge-conflict     # Ищет конфликтные маркеры
+      - id: detect-private-key       # Ищет приватные ключи в коде
+#      - id: check-ast                # Проверяет синтаксис Python
+#      - id: check-json               # Проверяет JSON файлы
+#      - id: check-toml               # Проверяет TOML файлы
+#      - id: destroyed-symlinks       # Проверяет битые симлинки
+
+  # Black - форматирование кода
+  - repo: https://github.com/psf/black
+    rev: 26.1.0
+    hooks:
+      - id: black
+        args: [ --line-length=119 ]
+
+  # isort - сортировка импортов
+  - repo: https://github.com/pycqa/isort
+    rev: 7.0.0
+    hooks:
+      - id: isort
+        args: [ "--profile", "black", "--line-length=119" ]
+
+  # Mypy - проверка типов
+#  - repo: https://github.com/pre-commit/mirrors-mypy
+#    rev: v1.19.1  # Укажите ВАШУ версию
+#    hooks:
+#      - id: mypy
+#        # Добавьте зависимости для типов используемых библиотек
+#        additional_dependencies:
+#          - types-requests
+#          - types-python-dateutil
+#          - types-PyYAML
+
+  # Flake8 - линтинг кода
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.3.0
+    hooks:
+      - id: flake8
